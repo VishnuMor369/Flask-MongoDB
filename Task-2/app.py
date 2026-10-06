@@ -19,9 +19,12 @@ def home():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    from_data = dict(request.form)
-    collection.insert_one(from_data)
-    return "Form submitted successfully!"
+    try:
+        from_data = dict(request.form)
+        collection.insert_one(from_data)
+        return "Form submitted successfully!"
+    except Exception as e:
+        return f"An error occurred: {str(e)}"
 
 
 if __name__ == '__main__':
